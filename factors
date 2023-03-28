@@ -1,0 +1,32 @@
+#!/usr/bin/env python3
+
+import sys
+
+def factorize(n):
+
+    """Return a tuple (p, q) such that n = p * q and p <= q."""
+
+    for i in range(2, int(n**0.5) + 1):
+
+        if n % i == 0:
+
+            return (i, n // i)
+
+    return None
+
+if len(sys.argv) != 2:
+
+    print("Usage: factors <file>")
+
+    sys.exit(1)
+
+with open(sys.argv[1]) as f:
+
+    for line in f:
+
+        n = int(line.strip())
+
+        p, q = factorize(n)
+
+        print(f"{n}={p}*{q}")
+
