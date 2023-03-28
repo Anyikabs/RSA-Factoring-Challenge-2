@@ -6,30 +6,30 @@ check_factor()
         then
                 args=("$@")
                 count=0
-                num2=1
+                q=1
                 for a in ${args[*]};
                 do
                         if [ $count -gt 1 ];
                         then
-                                num2=$(echo $a*$num2 | bc)
+                                q=$(echo $a*$q | bc)
                         fi
                         count=$((count + 1))
                 done
         else
-                num2=$3
+                q=$3
         fi
 
-        num1=$2
-        num=$(echo "$1" | tr ':' '=')
+        p=$2
+        n=$(echo "$1" | tr ':' '=')
 
-        result=$(echo "if($num2 > $num1) 1 else 0" | bc)
+        result=$(echo "if($q > $p) 1 else 0" | bc)
 	        if ((result == 1)); then
-		        numcp=$num1
-		        num1=$num2
-		        num2=$numcp
+		        ncp=$p
+		        p=$q
+		        q=$ncp
                 fi
 
-        echo "$num$num1*$num2"
+        echo "$n$p*$q"
 }
 
 if [ $# -ne 1 ]
