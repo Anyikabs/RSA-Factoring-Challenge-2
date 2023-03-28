@@ -7,7 +7,7 @@ check_factor() {
         num2=1
         for a in ${args[*]}; do
             if [ $count -gt 1 ]; then
-                num2=$(echo "$a*$num2" | bc)
+                num2=$(echo $a*$num2 | bc)
             fi
             count=$((count + 1))
         done
@@ -17,8 +17,8 @@ check_factor() {
     num1=$2
     num=$(echo "$1" | tr ':' '=')
 
-    result=$(echo "if($num2 > $num1) 1 else 0" | bc)
-    if ((result == 1)); then
+    result=$(echo "$num2 > $num1" | bc)
+    if [ $result -eq 1 ]; then
         numcp=$num1
         num1=$num2
         num2=$numcp
